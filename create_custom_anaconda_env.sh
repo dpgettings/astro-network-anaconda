@@ -9,7 +9,7 @@ env_name=custom_env   # name for new Anaconda environment
 new_env_dir=${HOME}/conda_envs   # New dir to contain Anaconda environments
 mkdir -p $new_env_dir
 # Tell Conda that this directory will contain Anaconda environments
-#conda config --add envs_dirs $new_env_dir
+conda config --add envs_dirs $new_env_dir
 printf '\n%s\n%s\n' '>>>>> Configuring Conda <<<<<' 'Contents of ~/.condarc:'; awk '{print "> "$0}' ~/.condarc
 
 ### Create a modifiable clone of the 'root' Anaconda environment ###
