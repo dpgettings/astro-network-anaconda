@@ -1,21 +1,30 @@
 #!/bin/bash
 
 ### --------------------------------------------------------------
-### Method 1: Create a new Python environment, cloned from default
+### Method 1: Create a new Anaconda/Python environment, cloned from default
 ### --------------------------------------------------------------
+env_name=test_env   # name for new Anaconda environment
 
-# Set up location for custom environments
-# ---------------------------------------
-# New dir for envs
-new_env_dir=${HOME}/conda_envs   
+### Set up writeable location for custom environments ###
+new_env_dir=${HOME}/conda_envs   # New dir to contain Anaconda environments
 mkdir -p $new_env_dir
-# Tell Conda that this directory will contain Python environments
-conda config --add envs_dirs $new_env_dir
-printf '\n   %s\n' "'${new_env_dir}' added to environment locations in ~/.condarc"
+# Tell Conda that this directory will contain Anaconda environments
+#conda config --add envs_dirs $new_env_dir
+printf '\n%s\n%s\n' '>>>>> Configuring Conda <<<<<' 'Contents of ~/.condarc:'; awk '{print "> "$0}' ~/.condarc
 
-# Clone default env into home directory 
-# (i.e. where we have write permissions)
-env_name=test_env   # name for new env
-#conda create --yes --prefix ${new_env_dir}/${env_name} --clone $default_env
-#conda create --yes --prefix ${new_env_dir}/${env_name} --clone root
+### Create a modifiable clone of the 'root' Anaconda environment ###
+printf '\n%s\n' '>>>>> Creating New Anaconda Environment <<<<<'
+conda create --yes --quiet --name ${env_name} --clone root
+# Double check that we created a new environment
+conda info --env
 
+### Install Pip into our new environment ###
+# >> Will allow downloading non-conda Python packages
+# Use -n flag to indicate the new environment
+printf '\n%s\n' '>>>>> Installing Pip (Just to be Sure) <<<<<'
+conda install --no-deps --yes -n ${env_name} pip
+
+### Use this environment as the default ###
+# Add this line to ~/.cshrc?
+#printf '\n\n%s \n%s \n%s \n' "## Line added automatically by ${0}" "## $(date)" "source activate ${env_name}"
+printf '\n\n%s \n%s' "## Run this command to use your new Anaconda environment:" "source activate ${env_name}"
