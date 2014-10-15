@@ -3,7 +3,7 @@
 ### --------------------------------------------------------------
 ### Method 1: Create a new Anaconda/Python environment, cloned from default
 ### --------------------------------------------------------------
-env_name=test_env   # name for new Anaconda environment
+env_name=custom_env   # name for new Anaconda environment
 
 ### Set up writeable location for custom environments ###
 new_env_dir=${HOME}/conda_envs   # New dir to contain Anaconda environments
@@ -26,5 +26,5 @@ conda install --no-deps --yes -n ${env_name} pip
 
 ### Use this environment as the default ###
 # Add this line to ~/.cshrc?
-#printf '\n\n%s \n%s \n%s \n' "## Line added automatically by ${0}" "## $(date)" "source activate ${env_name}"
+#printf '\n\n%s \n%s \n%s \n' "## Line added automatically by ${0}" "## $(date)" "source activate ${env_name}" >> ~/.cshrc
 printf '\n\n%s \n%s' "## Run this command to use your new Anaconda environment:" "source activate ${env_name}"
