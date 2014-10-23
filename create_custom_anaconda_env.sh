@@ -28,5 +28,5 @@ printf '\n%s \n%s \n%s \n' \
     "source activate ${env_name}" >> ~/.bashrc   # Modify .bashrc file to auto-activate $env_name on login
 printf '\n%s \n%s \n%s \n%s \n' \
     "## Added automatically by ${0}" "## $(date)" "set path = ( ${new_env_dir}/${env_name}/bin \$path )" \
-    "setenv CONDA_DEFAULT_ENV ${env_name}" >> ~/.cshrc # Modify .bashrc file to point to $env_name on login
+    "setenv CONDA_DEFAULT_ENV ${env_name}" >> ~/.cshrc # Modify .cshrc file to point to $env_name on login
 
