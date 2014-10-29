@@ -23,8 +23,10 @@ ln -s ${pkg_src}/* ${pkg_dst}/ 2> /dev/null   # Symlink all contents (tarballs A
 conda create --quiet --no-deps --yes --name ${env_name} --clone root
 
 ### Enable using this environment as the default ###
-printf '\n%s \n%s \n%s \n' "## Added automatically by ${0}" \
-    "## $(date)" "source activate ${env_name}" >> ~/.bashrc   # Modify .bashrc file to auto-activate $env_name on login
-printf '\n%s \n%s \n%s \n' "## Added automatically by ${0}" \
-    "## $(date)" "set path = ( ${new_env_dir}/${env_name}/bin \$path )" >> ~/.cshrc # Modify .bashrc file to point to $env_name on login
+printf '\n%s \n%s \n%s \n' \
+    "## Added automatically by ${0}" "## $(date)" \
+    "source activate ${env_name}" >> ~/.bashrc   # Modify .bashrc file to auto-activate $env_name on login
+printf '\n%s \n%s \n%s \n%s \n' \
+    "## Added automatically by ${0}" "## $(date)" "set path = ( ${new_env_dir}/${env_name}/bin \$path )" \
+    "setenv CONDA_DEFAULT_ENV ${env_name}" >> ~/.cshrc # Modify .cshrc file to point to $env_name on login
 
